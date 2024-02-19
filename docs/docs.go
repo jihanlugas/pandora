@@ -470,6 +470,11 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "name": "createBy",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "name": "email",
                         "in": "query"
                     },

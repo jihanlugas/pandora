@@ -511,6 +511,9 @@ paths:
       - application/json
       parameters:
       - in: query
+        name: createBy
+        type: string
+      - in: query
         name: email
         type: string
       - in: query
