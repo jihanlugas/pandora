@@ -61,8 +61,15 @@ func (r repository) Page(conn *gorm.DB, req *request.PageKtp) ([]model.KtpView, 
 		Where("LOWER(kabupaten_kota) LIKE LOWER(?)", "%"+req.KabupatenKota+"%").
 		Where("LOWER(provinsi) LIKE LOWER(?)", "%"+req.Provinsi+"%").
 		Where("LOWER(status_perkawinan) LIKE LOWER(?)", "%"+req.StatusPerkawinan+"%").
-		Where("LOWER(kewarganegaraan) LIKE LOWER(?)", "%"+req.Kewarganegaraan+"%").
-		Where("create_by LIKE ?", "%"+req.CreateBy+"%")
+		Where("LOWER(kewarganegaraan) LIKE LOWER(?)", "%"+req.Kewarganegaraan+"%")
+
+	if req.CreateBy != "" {
+		query = query.Where("create_by = ?", req.CreateBy)
+	}
+
+	if req.JenisKelamin != "" {
+		query = query.Where("jenis_kelamin = ?", req.JenisKelamin)
+	}
 
 	err = query.Count(&count).Error
 	if err != nil {

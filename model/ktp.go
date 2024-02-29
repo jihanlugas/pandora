@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func (m *User) BeforeCreate(tx *gorm.DB) (err error) {
+func (m *Ktp) BeforeCreate(tx *gorm.DB) (err error) {
 	now := time.Now()
 
 	if m.ID == "" {
@@ -18,13 +18,12 @@ func (m *User) BeforeCreate(tx *gorm.DB) (err error) {
 	return
 }
 
-func (m *User) BeforeUpdate(tx *gorm.DB) (err error) {
+func (m *Ktp) BeforeUpdate(tx *gorm.DB) (err error) {
 	now := time.Now()
 	m.UpdateDt = now
-
 	return
 }
 
-func (m *User) BeforeDelete(tx *gorm.DB) (err error) {
+func (m *Ktp) BeforeDelete(tx *gorm.DB) (err error) {
 	return tx.Save(m).Error
 }

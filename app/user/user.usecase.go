@@ -120,8 +120,6 @@ func (u usecaseUser) Delete(loginUser jwt.UserLogin, id string) error {
 		return err
 	}
 
-	data.DeleteBy = loginUser.UserID
-
 	tx := conn.Begin()
 
 	err = u.repo.Delete(tx, data)

@@ -85,10 +85,9 @@ func up() {
 
 	// view
 	vUser := conn.Model(&model.User{}).
-		Select("users.*, u1.fullname as create_name, u2.fullname as update_name, u3.fullname as delete_name").
+		Select("users.*, u1.fullname as create_name, u2.fullname as update_name").
 		Joins("left join users u1 on u1.id = users.create_by").
-		Joins("left join users u2 on u2.id = users.update_by").
-		Joins("left join users u3 on u3.id = users.delete_by")
+		Joins("left join users u2 on u2.id = users.update_by")
 
 	err = conn.Migrator().CreateView(model.VIEW_USER, gorm.ViewOption{
 		Replace: true,

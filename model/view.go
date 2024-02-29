@@ -22,11 +22,9 @@ type UserView struct {
 	CreateDt    time.Time      `json:"createDt"`
 	UpdateBy    string         `json:"updateBy"`
 	UpdateDt    time.Time      `json:"updateDt"`
-	DeleteBy    string         `json:"deleteBy"`
 	DeleteDt    gorm.DeletedAt `json:"deleteDt"`
 	CreateName  string         `json:"createName"`
 	UpdateName  string         `json:"updateName"`
-	DeleteName  string         `json:"deleteName"`
 }
 
 func (UserView) TableName() string {

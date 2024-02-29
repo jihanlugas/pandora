@@ -101,6 +101,11 @@
                     },
                     {
                         "type": "string",
+                        "name": "jenisKelamin",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "name": "kabupatenKota",
                         "in": "query"
                     },
@@ -721,6 +726,7 @@
         "request.CreateKtp": {
             "type": "object",
             "required": [
+                "jenisKelamin",
                 "nama",
                 "nik",
                 "tanggalLahir",
@@ -731,6 +737,9 @@
                     "type": "string"
                 },
                 "berlakuHingga": {
+                    "type": "string"
+                },
+                "jenisKelamin": {
                     "type": "string"
                 },
                 "kabupatenKota": {
@@ -822,6 +831,7 @@
         "request.UpdateKtp": {
             "type": "object",
             "required": [
+                "jenisKelamin",
                 "nama",
                 "nik",
                 "tanggalLahir",
@@ -832,6 +842,9 @@
                     "type": "string"
                 },
                 "berlakuHingga": {
+                    "type": "string"
+                },
+                "jenisKelamin": {
                     "type": "string"
                 },
                 "kabupatenKota": {

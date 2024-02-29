@@ -7,6 +7,7 @@ type CreateKtp struct {
 	Nama             string     `json:"nama" form:"nama" query:"nama" validate:"required"`
 	TempatLahir      string     `json:"tempatLahir" form:"tempatLahir" query:"tempatLahir" validate:"required"`
 	TanggalLahir     time.Time  `json:"tanggalLahir" form:"tanggalLahir" query:"tanggalLahir" validate:"required"`
+	JenisKelamin     string     `json:"jenisKelamin" form:"jenisKelamin" query:"jenisKelamin" validate:"required"`
 	Alamat           string     `json:"alamat" form:"alamat" query:"alamat" validate:""`
 	Rtrw             string     `json:"rtrw" form:"rtrw" query:"rtrw" validate:""`
 	KelurahanDesa    string     `json:"kelurahanDesa" form:"kelurahanDesa" query:"kelurahanDesa" validate:""`
@@ -24,6 +25,7 @@ type UpdateKtp struct {
 	Nama             string     `json:"nama" form:"nama" query:"nama" validate:"required"`
 	TempatLahir      string     `json:"tempatLahir" form:"tempatLahir" query:"tempatLahir" validate:"required"`
 	TanggalLahir     time.Time  `json:"tanggalLahir" form:"tanggalLahir" query:"tanggalLahir" validate:"required"`
+	JenisKelamin     string     `json:"jenisKelamin" form:"jenisKelamin" query:"jenisKelamin" validate:"required"`
 	Alamat           string     `json:"alamat" form:"alamat" query:"alamat" validate:""`
 	Rtrw             string     `json:"rtrw" form:"rtrw" query:"rtrw" validate:""`
 	KelurahanDesa    string     `json:"kelurahanDesa" form:"kelurahanDesa" query:"kelurahanDesa" validate:""`
@@ -40,6 +42,7 @@ type PageKtp struct {
 	Paging
 	Nik              string `json:"nik" form:"nik" query:"nik"`
 	Nama             string `json:"nama" form:"nama" query:"nama"`
+	JenisKelamin     string `json:"jenisKelamin" form:"jenisKelamin" query:"jenisKelamin"`
 	Alamat           string `json:"alamat" form:"alamat" query:"alamat"`
 	KelurahanDesa    string `json:"kelurahanDesa" form:"kelurahanDesa" query:"kelurahanDesa"`
 	Kecamatan        string `json:"kecamatan" form:"kecamatan" query:"kecamatan"`

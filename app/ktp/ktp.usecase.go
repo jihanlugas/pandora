@@ -39,6 +39,7 @@ func (u usecaseKtp) Create(loginUser jwt.UserLogin, req *request.CreateKtp) erro
 		Nama:             req.Nama,
 		TempatLahir:      req.TempatLahir,
 		TanggalLahir:     req.TanggalLahir,
+		JenisKelamin:     req.JenisKelamin,
 		Alamat:           req.Alamat,
 		Rtrw:             req.Rtrw,
 		KelurahanDesa:    req.KelurahanDesa,
@@ -87,6 +88,7 @@ func (u usecaseKtp) Update(loginUser jwt.UserLogin, id string, req *request.Upda
 	data.Nama = req.Nama
 	data.TempatLahir = req.TempatLahir
 	data.TanggalLahir = req.TanggalLahir
+	data.JenisKelamin = req.JenisKelamin
 	data.Alamat = req.Alamat
 	data.Rtrw = req.Rtrw
 	data.KelurahanDesa = req.KelurahanDesa

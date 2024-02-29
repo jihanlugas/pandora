@@ -108,6 +108,11 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "name": "jenisKelamin",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "name": "kabupatenKota",
                         "in": "query"
                     },
@@ -728,6 +733,7 @@ const docTemplate = `{
         "request.CreateKtp": {
             "type": "object",
             "required": [
+                "jenisKelamin",
                 "nama",
                 "nik",
                 "tanggalLahir",
@@ -738,6 +744,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "berlakuHingga": {
+                    "type": "string"
+                },
+                "jenisKelamin": {
                     "type": "string"
                 },
                 "kabupatenKota": {
@@ -829,6 +838,7 @@ const docTemplate = `{
         "request.UpdateKtp": {
             "type": "object",
             "required": [
+                "jenisKelamin",
                 "nama",
                 "nik",
                 "tanggalLahir",
@@ -839,6 +849,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "berlakuHingga": {
+                    "type": "string"
+                },
+                "jenisKelamin": {
                     "type": "string"
                 },
                 "kabupatenKota": {

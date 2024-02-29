@@ -21,7 +21,6 @@ type User struct {
 	CreateDt    time.Time      `gorm:"not null" json:"createDt"`
 	UpdateBy    string         `gorm:"not null" json:"updateBy"`
 	UpdateDt    time.Time      `gorm:"not null" json:"updateDt"`
-	DeleteBy    string         `gorm:"not null" json:"deleteBy"`
 	DeleteDt    gorm.DeletedAt `gorm:"null" json:"deleteDt"`
 }
 
@@ -31,6 +30,7 @@ type Ktp struct {
 	Nama             string         `gorm:"not null" json:"nama"`
 	TempatLahir      string         `gorm:"not null" json:"tempatLahir"`
 	TanggalLahir     time.Time      `gorm:"not null" json:"tanggalLahir"`
+	JenisKelamin     string         `gorm:"not null" json:"jenisKelamin"`
 	Alamat           string         `gorm:"not null" json:"alamat"`
 	Rtrw             string         `gorm:"not null" json:"rtrw"`
 	KelurahanDesa    string         `gorm:"not null" json:"kelurahanDesa"`
