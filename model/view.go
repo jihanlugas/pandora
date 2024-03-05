@@ -37,6 +37,7 @@ type KtpView struct {
 	Nama             string         `json:"nama"`
 	TempatLahir      string         `json:"tempatLahir"`
 	TanggalLahir     time.Time      `json:"tanggalLahir"`
+	JenisKelamin     string         `json:"jenisKelamin"`
 	Alamat           string         `json:"alamat"`
 	Rtrw             string         `json:"rtrw"`
 	KelurahanDesa    string         `json:"kelurahanDesa"`

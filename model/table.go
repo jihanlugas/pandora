@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+type Log struct {
+	ID        string    `gorm:"primaryKey"`
+	ClientIP  string    `gorm:"not null"`
+	Method    string    `gorm:"not null"`
+	Path      string    `gorm:"not null"`
+	Code      int       `gorm:"not null"`
+	Loginuser string    `gorm:"not null"`
+	Request   string    `gorm:"not null"`
+	Response  string    `gorm:"not null"`
+	CreateDt  time.Time `gorm:"not null"`
+}
+
 type User struct {
 	ID          string         `gorm:"primaryKey" json:"id"`
 	Role        string         `gorm:"not null" json:"role"`

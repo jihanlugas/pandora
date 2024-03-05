@@ -12,9 +12,19 @@ seed:
 	go run main.go db seed
 
 reset-db:
-	go run main.go db down
-	go run main.go db up
-	go run main.go db seed
+	go run main.go db reset
+
+region-up:
+	go run main.go db region-up
+
+region-down:
+	go run main.go db region-down
+
+region-seed:
+	go run main.go db region-seed
+
+region-reset-db:
+	go run main.go db region-reset
 
 build :
 	go build -o ./bin/main main.go

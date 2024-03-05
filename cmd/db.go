@@ -8,6 +8,7 @@ import (
 	"github.com/jihanlugas/pandora/utils"
 	"github.com/spf13/cobra"
 	"gorm.io/gorm"
+	"io/ioutil"
 )
 
 var dbCmd = &cobra.Command{
@@ -58,12 +59,210 @@ var resetCmd = &cobra.Command{
 	},
 }
 
+var regionUpCmd = &cobra.Command{
+	Use:   "region-up",
+	Short: "Up table",
+	Long:  "Up table",
+	Run: func(cmd *cobra.Command, args []string) {
+		regionUp()
+	},
+}
+
+var regionDownCmd = &cobra.Command{
+	Use:   "region-down",
+	Short: "Down table",
+	Long:  "remove public schema, create public schema, restore the default grants",
+	Run: func(cmd *cobra.Command, args []string) {
+		regionDown()
+	},
+}
+
+var regionSeedCmd = &cobra.Command{
+	Use:   "region-seed",
+	Short: "Seed data table",
+	Long:  "Seed data table",
+	Run: func(cmd *cobra.Command, args []string) {
+		regionSeed()
+	},
+}
+
+var regionResetCmd = &cobra.Command{
+	Use:   "region-reset",
+	Short: "Down, up, seed table",
+	Long:  "Down, up, seed table",
+	Run: func(cmd *cobra.Command, args []string) {
+		regionDown()
+		regionUp()
+		regionSeed()
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(dbCmd)
 	dbCmd.AddCommand(upCmd)
 	dbCmd.AddCommand(downCmd)
 	dbCmd.AddCommand(resetCmd)
 	dbCmd.AddCommand(seedCmd)
+	dbCmd.AddCommand(regionUpCmd)
+	dbCmd.AddCommand(regionDownCmd)
+	dbCmd.AddCommand(regionSeedCmd)
+	dbCmd.AddCommand(regionResetCmd)
+}
+
+func regionUp() {
+	var err error
+
+	conn, closeConn := db.GetConnection()
+	defer closeConn()
+
+	err = conn.Exec("CREATE SCHEMA region").Error
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Exec("GRANT ALL ON SCHEMA region TO postgres").Error
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Exec("GRANT ALL ON SCHEMA region TO public").Error
+	if err != nil {
+		panic(err)
+	}
+
+	// table
+	err = conn.Migrator().AutoMigrate(&model.Province{})
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Migrator().AutoMigrate(&model.Regency{})
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Migrator().AutoMigrate(&model.District{})
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Migrator().AutoMigrate(&model.Village{})
+	if err != nil {
+		panic(err)
+	}
+
+	vProvince := conn.Model(&model.Province{}).
+		Select("provinces.*")
+
+	err = conn.Migrator().CreateView(model.VIEW_PROVINCE, gorm.ViewOption{
+		Replace: true,
+		Query:   vProvince,
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	vRegency := conn.Model(&model.Regency{}).
+		Select("regencies.*, provinces.province_name as province_name").
+		Joins("left join region.provinces provinces on provinces.id = regencies.province_id")
+
+	err = conn.Migrator().CreateView(model.VIEW_REGENCY, gorm.ViewOption{
+		Replace: true,
+		Query:   vRegency,
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	vDistrict := conn.Model(&model.District{}).
+		Select("districts.*, provinces.province_name as province_name, regencies.regency_name as regency_name").
+		Joins("left join region.provinces provinces on provinces.id = districts.province_id").
+		Joins("left join region.regencies regencies on regencies.id = districts.regency_id")
+
+	err = conn.Migrator().CreateView(model.VIEW_DISTRICT, gorm.ViewOption{
+		Replace: true,
+		Query:   vDistrict,
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	vVillage := conn.Model(&model.Village{}).
+		Select("villages.*, provinces.province_name as province_name, regencies.regency_name as regency_name, districts.district_name as district_name").
+		Joins("left join region.provinces provinces on provinces.id = villages.province_id").
+		Joins("left join region.regencies regencies on regencies.id = villages.regency_id").
+		Joins("left join region.districts districts on districts.id = villages.district_id")
+
+	err = conn.Migrator().CreateView(model.VIEW_VILLAGE, gorm.ViewOption{
+		Replace: true,
+		Query:   vVillage,
+	})
+	if err != nil {
+		panic(err)
+	}
+}
+
+func regionDown() {
+	var err error
+
+	conn, closeConn := db.GetConnection()
+	defer closeConn()
+
+	err = conn.Exec("DROP SCHEMA region CASCADE").Error
+	if err != nil {
+		panic(err)
+	}
+}
+
+func regionSeed() {
+	var err error
+
+	conn, closeConn := db.GetConnection()
+	defer closeConn()
+
+	sqlContentProvince, err := ioutil.ReadFile("./sql/province.sql")
+	if err != nil {
+		panic(err)
+	}
+	sqlProvince := string(sqlContentProvince)
+
+	sqlContentRegency, err := ioutil.ReadFile("./sql/regency.sql")
+	if err != nil {
+		panic(err)
+	}
+	sqlRegency := string(sqlContentRegency)
+
+	sqlContentDistrict, err := ioutil.ReadFile("./sql/district.sql")
+	if err != nil {
+		panic(err)
+	}
+	sqlDistrict := string(sqlContentDistrict)
+
+	sqlContentVillage, err := ioutil.ReadFile("./sql/village.sql")
+	if err != nil {
+		panic(err)
+	}
+	sqlVillage := string(sqlContentVillage)
+
+	err = conn.Exec(sqlProvince).Error
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Exec(sqlRegency).Error
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Exec(sqlDistrict).Error
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.Exec(sqlVillage).Error
+	if err != nil {
+		panic(err)
+	}
 }
 
 func up() {
@@ -73,6 +272,11 @@ func up() {
 	defer closeConn()
 
 	// table
+	err = conn.Migrator().AutoMigrate(&model.Log{})
+	if err != nil {
+		panic(err)
+	}
+
 	err = conn.Migrator().AutoMigrate(&model.User{})
 	if err != nil {
 		panic(err)
@@ -97,14 +301,14 @@ func up() {
 		panic(err)
 	}
 
-	vCompany := conn.Model(&model.Ktp{}).
+	vKtp := conn.Model(&model.Ktp{}).
 		Select("ktps.*, u1.fullname as create_name, u2.fullname as update_name").
 		Joins("left join users u1 on u1.id = ktps.create_by").
 		Joins("left join users u2 on u2.id = ktps.update_by")
 
 	err = conn.Migrator().CreateView(model.VIEW_KTP, gorm.ViewOption{
 		Replace: true,
-		Query:   vCompany,
+		Query:   vKtp,
 	})
 	if err != nil {
 		panic(err)

@@ -2,6 +2,7 @@ package response
 
 import (
 	"encoding/json"
+	"github.com/jihanlugas/pandora/constant"
 	"github.com/labstack/echo/v4"
 )
 
@@ -51,7 +52,7 @@ func (r *Response) SendJSON(c echo.Context) error {
 	if js, err := json.Marshal(r); err != nil {
 		panic(err)
 	} else {
-		//c.Set(constant.Response, js)
+		c.Set(constant.Response, js)
 		return c.Blob(r.Code, echo.MIMEApplicationJSONCharsetUTF8, js)
 	}
 }

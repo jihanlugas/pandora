@@ -32,6 +32,8 @@ var (
 	AuthTokenExpiredHour   int64
 	MaxSizeUploadPhotoByte int64
 	DataPerPage            int
+	ScheduleDeleteLog      string
+	ToDeleteLogHour        int
 )
 
 func init() {
@@ -79,6 +81,12 @@ func init() {
 	}
 
 	DataPerPage, err = strconv.Atoi(os.Getenv("MIN_DATA_PER_PAGE"))
+	if err != nil {
+		panic(err)
+	}
+
+	ScheduleDeleteLog = os.Getenv("SCHEDULE_DELETE_LOG")
+	ToDeleteLogHour, err = strconv.Atoi(os.Getenv("TO_DELETE_LOG_HOUR"))
 	if err != nil {
 		panic(err)
 	}

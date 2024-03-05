@@ -5,8 +5,8 @@ package constant
 // 8 int8 migration
 // 24 string
 const (
-	//Request          = "request"
-	//Response         = "response"
+	Request          = "request"
+	Response         = "response"
 	TokenUserContext = "usr"
 	TokenContentLen  = 4
 	FormatDateLayout = "2006-01-02"
