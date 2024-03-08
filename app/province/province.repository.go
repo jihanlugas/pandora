@@ -11,6 +11,7 @@ type Repository interface {
 	GetById(conn *gorm.DB, id string) (model.Province, error)
 	GetViewById(conn *gorm.DB, id string) (model.ProvinceView, error)
 	Page(conn *gorm.DB, req *request.PageProvince) ([]model.ProvinceView, int64, error)
+	List(conn *gorm.DB, req *request.ListProvince) ([]model.ProvinceView, error)
 }
 
 type repository struct {
@@ -58,6 +59,24 @@ func (r repository) Page(conn *gorm.DB, req *request.PageProvince) ([]model.Prov
 	}
 
 	return data, count, err
+}
+
+func (r repository) List(conn *gorm.DB, req *request.ListProvince) ([]model.ProvinceView, error) {
+	var err error
+	var data []model.ProvinceView
+
+	query := conn.Model(&data).
+		Where("LOWER(province_name) LIKE LOWER(?)", "%"+req.ProvinceName+"%").
+		Order(fmt.Sprintf("%s %s", "province_name", "asc"))
+
+	err = query.Offset(req.GetLimit()).
+		Limit(req.GetLimit()).
+		Find(&data).Error
+	if err != nil {
+		return data, err
+	}
+
+	return data, err
 }
 
 func NewRepository() Repository {

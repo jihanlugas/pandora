@@ -9,6 +9,7 @@ import (
 type Usecase interface {
 	GetById(id string) (model.RegencyView, error)
 	Page(req *request.PageRegency) ([]model.RegencyView, int64, error)
+	List(req *request.ListRegency) ([]model.RegencyView, error)
 }
 
 type usecaseRegency struct {
@@ -40,6 +41,21 @@ func (u usecaseRegency) Page(req *request.PageRegency) ([]model.RegencyView, int
 	}
 
 	return data, count, err
+}
+
+func (u usecaseRegency) List(req *request.ListRegency) ([]model.RegencyView, error) {
+	var err error
+	var data []model.RegencyView
+
+	conn, closeConn := db.GetConnection()
+	defer closeConn()
+
+	data, err = u.repo.List(conn, req)
+	if err != nil {
+		return data, err
+	}
+
+	return data, err
 }
 
 func NewUsecase(repo Repository) Usecase {

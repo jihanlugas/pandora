@@ -20,16 +20,16 @@ func (p *Paging) GetPage() int {
 }
 
 func (p *Paging) GetLimit() int {
-	if p.Limit <= config.DataPerPage {
-		return config.DataPerPage
+	if p.Limit <= config.MinDataPerPage {
+		return config.MinDataPerPage
 	} else {
 		return p.Limit
 	}
 }
 
-func (p *Paging) SetLimit(lim int) {
-	p.Limit = lim
-}
+//func (p *Paging) SetLimit(lim int) {
+//	p.Limit = lim
+//}
 
 func (p *Paging) SetPage(page int) {
 	p.Page = page
@@ -38,6 +38,5 @@ func (p *Paging) SetPage(page int) {
 type IPaging interface {
 	GetPage() int
 	GetLimit() int
-	SetLimit(int)
 	SetPage(int)
 }

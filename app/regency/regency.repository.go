@@ -11,6 +11,7 @@ type Repository interface {
 	GetById(conn *gorm.DB, id string) (model.Regency, error)
 	GetViewById(conn *gorm.DB, id string) (model.RegencyView, error)
 	Page(conn *gorm.DB, req *request.PageRegency) ([]model.RegencyView, int64, error)
+	List(conn *gorm.DB, req *request.ListRegency) ([]model.RegencyView, error)
 }
 
 type repository struct {
@@ -62,6 +63,29 @@ func (r repository) Page(conn *gorm.DB, req *request.PageRegency) ([]model.Regen
 	}
 
 	return data, count, err
+}
+
+func (r repository) List(conn *gorm.DB, req *request.ListRegency) ([]model.RegencyView, error) {
+	var err error
+	var data []model.RegencyView
+
+	query := conn.Model(&data).
+		Where("LOWER(regency_name) LIKE LOWER(?)", "%"+req.RegencyName+"%")
+
+	if req.ProvinceID != "" {
+		query = query.Where("province_id = ?", req.ProvinceID)
+	}
+
+	query = query.Order(fmt.Sprintf("%s %s", "regency_name", "asc"))
+
+	err = query.Offset(req.GetLimit()).
+		Limit(req.GetLimit()).
+		Find(&data).Error
+	if err != nil {
+		return data, err
+	}
+
+	return data, err
 }
 
 func NewRepository() Repository {

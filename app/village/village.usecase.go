@@ -9,6 +9,7 @@ import (
 type Usecase interface {
 	GetById(id string) (model.VillageView, error)
 	Page(req *request.PageVillage) ([]model.VillageView, int64, error)
+	List(req *request.ListVillage) ([]model.VillageView, error)
 }
 
 type usecaseVillage struct {
@@ -40,6 +41,21 @@ func (u usecaseVillage) Page(req *request.PageVillage) ([]model.VillageView, int
 	}
 
 	return data, count, err
+}
+
+func (u usecaseVillage) List(req *request.ListVillage) ([]model.VillageView, error) {
+	var err error
+	var data []model.VillageView
+
+	conn, closeConn := db.GetConnection()
+	defer closeConn()
+
+	data, err = u.repo.List(conn, req)
+	if err != nil {
+		return data, err
+	}
+
+	return data, err
 }
 
 func NewUsecase(repo Repository) Usecase {

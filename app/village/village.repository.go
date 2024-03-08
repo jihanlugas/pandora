@@ -11,6 +11,7 @@ type Repository interface {
 	GetById(conn *gorm.DB, id string) (model.Village, error)
 	GetViewById(conn *gorm.DB, id string) (model.VillageView, error)
 	Page(conn *gorm.DB, req *request.PageVillage) ([]model.VillageView, int64, error)
+	List(conn *gorm.DB, req *request.ListVillage) ([]model.VillageView, error)
 }
 
 type repository struct {
@@ -70,6 +71,37 @@ func (r repository) Page(conn *gorm.DB, req *request.PageVillage) ([]model.Villa
 	}
 
 	return data, count, err
+}
+
+func (r repository) List(conn *gorm.DB, req *request.ListVillage) ([]model.VillageView, error) {
+	var err error
+	var data []model.VillageView
+
+	query := conn.Model(&data).
+		Where("LOWER(village_name) LIKE LOWER(?)", "%"+req.VillageName+"%")
+
+	if req.ProvinceID != "" {
+		query = query.Where("province_id = ?", req.ProvinceID)
+	}
+
+	if req.RegencyID != "" {
+		query = query.Where("regency_id = ?", req.RegencyID)
+	}
+
+	if req.DistrictID != "" {
+		query = query.Where("district_id = ?", req.DistrictID)
+	}
+
+	query = query.Order(fmt.Sprintf("%s %s", "village_name", "asc"))
+
+	err = query.Offset(req.GetLimit()).
+		Limit(req.GetLimit()).
+		Find(&data).Error
+	if err != nil {
+		return data, err
+	}
+
+	return data, err
 }
 
 func NewRepository() Repository {

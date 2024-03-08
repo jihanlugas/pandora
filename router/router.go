@@ -70,18 +70,22 @@ func Init() *echo.Echo {
 	provinceRouter := router.Group("/province")
 	provinceRouter.GET("/:id", provinceHandler.GetById)
 	provinceRouter.GET("/page", provinceHandler.Page)
+	provinceRouter.GET("/list", provinceHandler.List)
 
 	regencyRouter := router.Group("/regency")
 	regencyRouter.GET("/:id", regencyHandler.GetById)
 	regencyRouter.GET("/page", regencyHandler.Page)
+	regencyRouter.GET("/list", regencyHandler.List)
 
 	districtRouter := router.Group("/district")
 	districtRouter.GET("/:id", districtHandler.GetById)
 	districtRouter.GET("/page", districtHandler.Page)
+	districtRouter.GET("/list", districtHandler.List)
 
 	villageRouter := router.Group("/village")
 	villageRouter.GET("/:id", villageHandler.GetById)
 	villageRouter.GET("/page", villageHandler.Page)
+	villageRouter.GET("/list", villageHandler.List)
 
 	userRouter := router.Group("/user")
 	userRouter.GET("/:id", userHandler.GetById)

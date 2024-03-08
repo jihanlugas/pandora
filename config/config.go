@@ -31,7 +31,8 @@ var (
 	HeaderAuthName         string
 	AuthTokenExpiredHour   int64
 	MaxSizeUploadPhotoByte int64
-	DataPerPage            int
+	MinDataPerPage         int
+	MaxDataPerList         int
 	ScheduleDeleteLog      string
 	ToDeleteLogHour        int
 )
@@ -80,7 +81,12 @@ func init() {
 		panic(err)
 	}
 
-	DataPerPage, err = strconv.Atoi(os.Getenv("MIN_DATA_PER_PAGE"))
+	MinDataPerPage, err = strconv.Atoi(os.Getenv("MIN_DATA_PER_PAGE"))
+	if err != nil {
+		panic(err)
+	}
+
+	MaxDataPerList, err = strconv.Atoi(os.Getenv("MAX_DATA_PER_LIST"))
 	if err != nil {
 		panic(err)
 	}
