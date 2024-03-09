@@ -208,7 +208,7 @@ func regionDown() {
 	conn, closeConn := db.GetConnection()
 	defer closeConn()
 
-	err = conn.Exec("DROP SCHEMA region CASCADE").Error
+	err = conn.Exec("DROP SCHEMA IF EXISTS region CASCADE").Error
 	if err != nil {
 		panic(err)
 	}
