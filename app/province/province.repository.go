@@ -69,8 +69,7 @@ func (r repository) List(conn *gorm.DB, req *request.ListProvince) ([]model.Prov
 		Where("LOWER(province_name) LIKE LOWER(?)", "%"+req.ProvinceName+"%").
 		Order(fmt.Sprintf("%s %s", "province_name", "asc"))
 
-	err = query.Offset(req.GetLimit()).
-		Limit(req.GetLimit()).
+	err = query.Limit(req.GetLimit()).
 		Find(&data).Error
 	if err != nil {
 		return data, err

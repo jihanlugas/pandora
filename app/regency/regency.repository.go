@@ -78,8 +78,7 @@ func (r repository) List(conn *gorm.DB, req *request.ListRegency) ([]model.Regen
 
 	query = query.Order(fmt.Sprintf("%s %s", "regency_name", "asc"))
 
-	err = query.Offset(req.GetLimit()).
-		Limit(req.GetLimit()).
+	err = query.Limit(req.GetLimit()).
 		Find(&data).Error
 	if err != nil {
 		return data, err

@@ -302,9 +302,13 @@ func up() {
 	}
 
 	vKtp := conn.Model(&model.Ktp{}).
-		Select("ktps.*, u1.fullname as create_name, u2.fullname as update_name").
+		Select("ktps.*, u1.fullname as create_name, u2.fullname as update_name, provinces.province_name as province_name, regencies.regency_name as regency_name, districts.district_name as district_name, villages.village_name as village_name").
 		Joins("left join users u1 on u1.id = ktps.create_by").
-		Joins("left join users u2 on u2.id = ktps.update_by")
+		Joins("left join users u2 on u2.id = ktps.update_by").
+		Joins("left join region.provinces provinces on provinces.id = ktps.province_id").
+		Joins("left join region.regencies regencies on regencies.id = ktps.regency_id").
+		Joins("left join region.districts districts on districts.id = ktps.district_id").
+		Joins("left join region.villages villages on villages.id = ktps.village_id")
 
 	err = conn.Migrator().CreateView(model.VIEW_KTP, gorm.ViewOption{
 		Replace: true,

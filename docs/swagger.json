@@ -265,22 +265,12 @@
                     },
                     {
                         "type": "string",
+                        "name": "districtId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "name": "jenisKelamin",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "kabupatenKota",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "kecamatan",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "kelurahanDesa",
                         "in": "query"
                     },
                     {
@@ -310,7 +300,22 @@
                     },
                     {
                         "type": "string",
-                        "name": "provinsi",
+                        "name": "pekerjaan",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "provinceId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "regencyId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "rtrw",
                         "in": "query"
                     },
                     {
@@ -326,6 +331,11 @@
                     {
                         "type": "string",
                         "name": "statusPerkawinan",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "villageId",
                         "in": "query"
                     }
                 ],
@@ -1375,16 +1385,10 @@
                 "berlakuHingga": {
                     "type": "string"
                 },
+                "districtId": {
+                    "type": "string"
+                },
                 "jenisKelamin": {
-                    "type": "string"
-                },
-                "kabupatenKota": {
-                    "type": "string"
-                },
-                "kecamatan": {
-                    "type": "string"
-                },
-                "kelurahanDesa": {
                     "type": "string"
                 },
                 "kewarganegaraan": {
@@ -1399,7 +1403,10 @@
                 "pekerjaan": {
                     "type": "string"
                 },
-                "provinsi": {
+                "provinceId": {
+                    "type": "string"
+                },
+                "regencyId": {
                     "type": "string"
                 },
                 "rtrw": {
@@ -1412,6 +1419,9 @@
                     "type": "string"
                 },
                 "tempatLahir": {
+                    "type": "string"
+                },
+                "villageId": {
                     "type": "string"
                 }
             }
@@ -1480,16 +1490,10 @@
                 "berlakuHingga": {
                     "type": "string"
                 },
+                "districtId": {
+                    "type": "string"
+                },
                 "jenisKelamin": {
-                    "type": "string"
-                },
-                "kabupatenKota": {
-                    "type": "string"
-                },
-                "kecamatan": {
-                    "type": "string"
-                },
-                "kelurahanDesa": {
                     "type": "string"
                 },
                 "kewarganegaraan": {
@@ -1504,7 +1508,10 @@
                 "pekerjaan": {
                     "type": "string"
                 },
-                "provinsi": {
+                "provinceId": {
+                    "type": "string"
+                },
+                "regencyId": {
                     "type": "string"
                 },
                 "rtrw": {
@@ -1517,6 +1524,9 @@
                     "type": "string"
                 },
                 "tempatLahir": {
+                    "type": "string"
+                },
+                "villageId": {
                     "type": "string"
                 }
             }

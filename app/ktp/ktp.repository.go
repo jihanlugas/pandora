@@ -55,13 +55,28 @@ func (r repository) Page(conn *gorm.DB, req *request.PageKtp) ([]model.KtpView, 
 	query := conn.Model(&data).
 		Where("LOWER(nik) LIKE LOWER(?)", "%"+req.Nik+"%").
 		Where("LOWER(nama) LIKE LOWER(?)", "%"+req.Nama+"%").
+		Where("LOWER(jenis_kelamin) LIKE LOWER(?)", "%"+req.JenisKelamin+"%").
 		Where("LOWER(alamat) LIKE LOWER(?)", "%"+req.Alamat+"%").
-		Where("LOWER(kelurahan_desa) LIKE LOWER(?)", "%"+req.KelurahanDesa+"%").
-		Where("LOWER(Kecamatan) LIKE LOWER(?)", "%"+req.Kecamatan+"%").
-		Where("LOWER(kabupaten_kota) LIKE LOWER(?)", "%"+req.KabupatenKota+"%").
-		Where("LOWER(provinsi) LIKE LOWER(?)", "%"+req.Provinsi+"%").
+		Where("LOWER(rtrw) LIKE LOWER(?)", "%"+req.Rtrw+"%").
+		Where("LOWER(pekerjaan) LIKE LOWER(?)", "%"+req.Pekerjaan+"%").
 		Where("LOWER(status_perkawinan) LIKE LOWER(?)", "%"+req.StatusPerkawinan+"%").
 		Where("LOWER(kewarganegaraan) LIKE LOWER(?)", "%"+req.Kewarganegaraan+"%")
+
+	if req.ProvinceID != "" {
+		query = query.Where("province_id = ?", req.ProvinceID)
+	}
+
+	if req.RegencyID != "" {
+		query = query.Where("regency_id = ?", req.RegencyID)
+	}
+
+	if req.DistrictID != "" {
+		query = query.Where("district_id = ?", req.DistrictID)
+	}
+
+	if req.VillageID != "" {
+		query = query.Where("village_id = ?", req.VillageID)
+	}
 
 	if req.CreateBy != "" {
 		query = query.Where("create_by = ?", req.CreateBy)

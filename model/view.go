@@ -38,12 +38,12 @@ type KtpView struct {
 	TempatLahir      string         `json:"tempatLahir"`
 	TanggalLahir     time.Time      `json:"tanggalLahir"`
 	JenisKelamin     string         `json:"jenisKelamin"`
+	ProvinceID       string         `json:"provinceId"`
+	RegencyID        string         `json:"regencyId"`
+	DistrictID       string         `json:"districtId"`
+	VillageID        string         `json:"villageId"`
 	Alamat           string         `json:"alamat"`
 	Rtrw             string         `json:"rtrw"`
-	KelurahanDesa    string         `json:"kelurahanDesa"`
-	Kecamatan        string         `json:"kecamatan"`
-	KabupatenKota    string         `json:"kabupatenKota"`
-	Provinsi         string         `json:"provinsi"`
 	Pekerjaan        string         `json:"pekerjaan"`
 	StatusPerkawinan string         `json:"statusPerkawinan"`
 	Kewarganegaraan  string         `json:"kewarganegaraan"`
@@ -56,6 +56,10 @@ type KtpView struct {
 	DeleteDt         gorm.DeletedAt `json:"deleteDt"`
 	CreateName       string         `json:"createName"`
 	UpdateName       string         `json:"updateName"`
+	ProvinceName     string         `json:"provinceName"`
+	RegencyName      string         `json:"regencyName"`
+	DistrictName     string         `json:"districtName"`
+	VillageName      string         `json:"villageName"`
 }
 
 func (KtpView) TableName() string {

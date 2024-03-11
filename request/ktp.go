@@ -8,12 +8,12 @@ type CreateKtp struct {
 	TempatLahir      string     `json:"tempatLahir" form:"tempatLahir" query:"tempatLahir" validate:"required"`
 	TanggalLahir     time.Time  `json:"tanggalLahir" form:"tanggalLahir" query:"tanggalLahir" validate:"required"`
 	JenisKelamin     string     `json:"jenisKelamin" form:"jenisKelamin" query:"jenisKelamin" validate:"required"`
+	ProvinceID       string     `json:"provinceId" form:"provinceId" query:"provinceId" validate:""`
+	RegencyID        string     `json:"regencyId" form:"regencyId" query:"regencyId" validate:""`
+	DistrictID       string     `json:"districtId" form:"districtId" query:"districtId" validate:""`
+	VillageID        string     `json:"villageId" form:"villageId" query:"villageId" validate:""`
 	Alamat           string     `json:"alamat" form:"alamat" query:"alamat" validate:""`
 	Rtrw             string     `json:"rtrw" form:"rtrw" query:"rtrw" validate:""`
-	KelurahanDesa    string     `json:"kelurahanDesa" form:"kelurahanDesa" query:"kelurahanDesa" validate:""`
-	Kecamatan        string     `json:"kecamatan" form:"kecamatan" query:"kecamatan" validate:""`
-	KabupatenKota    string     `json:"kabupatenKota" form:"kabupatenKota" query:"kabupatenKota" validate:""`
-	Provinsi         string     `json:"provinsi" form:"provinsi" query:"provinsi" validate:""`
 	Pekerjaan        string     `json:"pekerjaan" form:"pekerjaan" query:"pekerjaan" validate:""`
 	StatusPerkawinan string     `json:"statusPerkawinan" form:"statusPerkawinan" query:"statusPerkawinan" validate:""`
 	Kewarganegaraan  string     `json:"kewarganegaraan" form:"kewarganegaraan" query:"kewarganegaraan" validate:""`
@@ -26,12 +26,12 @@ type UpdateKtp struct {
 	TempatLahir      string     `json:"tempatLahir" form:"tempatLahir" query:"tempatLahir" validate:"required"`
 	TanggalLahir     time.Time  `json:"tanggalLahir" form:"tanggalLahir" query:"tanggalLahir" validate:"required"`
 	JenisKelamin     string     `json:"jenisKelamin" form:"jenisKelamin" query:"jenisKelamin" validate:"required"`
+	ProvinceID       string     `json:"provinceId" form:"provinceId" query:"provinceId" validate:""`
+	RegencyID        string     `json:"regencyId" form:"regencyId" query:"regencyId" validate:""`
+	DistrictID       string     `json:"districtId" form:"districtId" query:"districtId" validate:""`
+	VillageID        string     `json:"villageId" form:"villageId" query:"villageId" validate:""`
 	Alamat           string     `json:"alamat" form:"alamat" query:"alamat" validate:""`
 	Rtrw             string     `json:"rtrw" form:"rtrw" query:"rtrw" validate:""`
-	KelurahanDesa    string     `json:"kelurahanDesa" form:"kelurahanDesa" query:"kelurahanDesa" validate:""`
-	Kecamatan        string     `json:"kecamatan" form:"kecamatan" query:"kecamatan" validate:""`
-	KabupatenKota    string     `json:"kabupatenKota" form:"kabupatenKota" query:"kabupatenKota" validate:""`
-	Provinsi         string     `json:"provinsi" form:"provinsi" query:"provinsi" validate:""`
 	Pekerjaan        string     `json:"pekerjaan" form:"pekerjaan" query:"pekerjaan" validate:""`
 	StatusPerkawinan string     `json:"statusPerkawinan" form:"statusPerkawinan" query:"statusPerkawinan" validate:""`
 	Kewarganegaraan  string     `json:"kewarganegaraan" form:"kewarganegaraan" query:"kewarganegaraan" validate:""`
@@ -43,11 +43,13 @@ type PageKtp struct {
 	Nik              string `json:"nik" form:"nik" query:"nik"`
 	Nama             string `json:"nama" form:"nama" query:"nama"`
 	JenisKelamin     string `json:"jenisKelamin" form:"jenisKelamin" query:"jenisKelamin"`
+	ProvinceID       string `json:"provinceId" form:"provinceId" query:"provinceId"`
+	RegencyID        string `json:"regencyId" form:"regencyId" query:"regencyId"`
+	DistrictID       string `json:"districtId" form:"districtId" query:"districtId"`
+	VillageID        string `json:"villageId" form:"villageId" query:"villageId"`
 	Alamat           string `json:"alamat" form:"alamat" query:"alamat"`
-	KelurahanDesa    string `json:"kelurahanDesa" form:"kelurahanDesa" query:"kelurahanDesa"`
-	Kecamatan        string `json:"kecamatan" form:"kecamatan" query:"kecamatan"`
-	KabupatenKota    string `json:"kabupatenKota" form:"kabupatenKota" query:"kabupatenKota"`
-	Provinsi         string `json:"provinsi" form:"provinsi" query:"provinsi"`
+	Rtrw             string `json:"rtrw" form:"rtrw" query:"rtrw"`
+	Pekerjaan        string `json:"pekerjaan" form:"pekerjaan" query:"pekerjaan"`
 	StatusPerkawinan string `json:"statusPerkawinan" form:"statusPerkawinan" query:"statusPerkawinan"`
 	Kewarganegaraan  string `json:"kewarganegaraan" form:"kewarganegaraan" query:"kewarganegaraan"`
 	CreateBy         string `json:"createBy" form:"createBy" query:"createBy"`

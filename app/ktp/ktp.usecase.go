@@ -40,12 +40,12 @@ func (u usecaseKtp) Create(loginUser jwt.UserLogin, req *request.CreateKtp) erro
 		TempatLahir:      req.TempatLahir,
 		TanggalLahir:     req.TanggalLahir,
 		JenisKelamin:     req.JenisKelamin,
+		ProvinceID:       req.ProvinceID,
+		RegencyID:        req.RegencyID,
+		DistrictID:       req.DistrictID,
+		VillageID:        req.VillageID,
 		Alamat:           req.Alamat,
 		Rtrw:             req.Rtrw,
-		KelurahanDesa:    req.KelurahanDesa,
-		Kecamatan:        req.Kecamatan,
-		KabupatenKota:    req.KabupatenKota,
-		Provinsi:         req.Provinsi,
 		Pekerjaan:        req.Pekerjaan,
 		StatusPerkawinan: req.StatusPerkawinan,
 		Kewarganegaraan:  req.Kewarganegaraan,
@@ -89,12 +89,12 @@ func (u usecaseKtp) Update(loginUser jwt.UserLogin, id string, req *request.Upda
 	data.TempatLahir = req.TempatLahir
 	data.TanggalLahir = req.TanggalLahir
 	data.JenisKelamin = req.JenisKelamin
+	data.ProvinceID = req.ProvinceID
+	data.RegencyID = req.RegencyID
+	data.DistrictID = req.DistrictID
+	data.VillageID = req.VillageID
 	data.Alamat = req.Alamat
 	data.Rtrw = req.Rtrw
-	data.KelurahanDesa = req.KelurahanDesa
-	data.Kecamatan = req.Kecamatan
-	data.KabupatenKota = req.KabupatenKota
-	data.Provinsi = req.Provinsi
 	data.Pekerjaan = req.Pekerjaan
 	data.StatusPerkawinan = req.StatusPerkawinan
 	data.Kewarganegaraan = req.Kewarganegaraan

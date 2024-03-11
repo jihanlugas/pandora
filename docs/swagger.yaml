@@ -21,13 +21,9 @@ definitions:
         type: string
       berlakuHingga:
         type: string
+      districtId:
+        type: string
       jenisKelamin:
-        type: string
-      kabupatenKota:
-        type: string
-      kecamatan:
-        type: string
-      kelurahanDesa:
         type: string
       kewarganegaraan:
         type: string
@@ -37,7 +33,9 @@ definitions:
         type: string
       pekerjaan:
         type: string
-      provinsi:
+      provinceId:
+        type: string
+      regencyId:
         type: string
       rtrw:
         type: string
@@ -46,6 +44,8 @@ definitions:
       tanggalLahir:
         type: string
       tempatLahir:
+        type: string
+      villageId:
         type: string
     required:
     - jenisKelamin
@@ -95,13 +95,9 @@ definitions:
         type: string
       berlakuHingga:
         type: string
+      districtId:
+        type: string
       jenisKelamin:
-        type: string
-      kabupatenKota:
-        type: string
-      kecamatan:
-        type: string
-      kelurahanDesa:
         type: string
       kewarganegaraan:
         type: string
@@ -111,7 +107,9 @@ definitions:
         type: string
       pekerjaan:
         type: string
-      provinsi:
+      provinceId:
+        type: string
+      regencyId:
         type: string
       rtrw:
         type: string
@@ -120,6 +118,8 @@ definitions:
       tanggalLahir:
         type: string
       tempatLahir:
+        type: string
+      villageId:
         type: string
     required:
     - jenisKelamin
@@ -394,16 +394,10 @@ paths:
         name: createBy
         type: string
       - in: query
+        name: districtId
+        type: string
+      - in: query
         name: jenisKelamin
-        type: string
-      - in: query
-        name: kabupatenKota
-        type: string
-      - in: query
-        name: kecamatan
-        type: string
-      - in: query
-        name: kelurahanDesa
         type: string
       - in: query
         name: kewarganegaraan
@@ -421,7 +415,16 @@ paths:
         name: page
         type: integer
       - in: query
-        name: provinsi
+        name: pekerjaan
+        type: string
+      - in: query
+        name: provinceId
+        type: string
+      - in: query
+        name: regencyId
+        type: string
+      - in: query
+        name: rtrw
         type: string
       - in: query
         name: sortField
@@ -431,6 +434,9 @@ paths:
         type: string
       - in: query
         name: statusPerkawinan
+        type: string
+      - in: query
+        name: villageId
         type: string
       produces:
       - application/json

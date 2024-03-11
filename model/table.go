@@ -43,12 +43,12 @@ type Ktp struct {
 	TempatLahir      string         `gorm:"not null" json:"tempatLahir"`
 	TanggalLahir     time.Time      `gorm:"not null" json:"tanggalLahir"`
 	JenisKelamin     string         `gorm:"not null" json:"jenisKelamin"`
+	ProvinceID       string         `gorm:"not null" json:"provinceId"`
+	RegencyID        string         `gorm:"not null" json:"regencyId"`
+	DistrictID       string         `gorm:"not null" json:"districtId"`
+	VillageID        string         `gorm:"not null" json:"villageId"`
 	Alamat           string         `gorm:"not null" json:"alamat"`
 	Rtrw             string         `gorm:"not null" json:"rtrw"`
-	KelurahanDesa    string         `gorm:"not null" json:"kelurahanDesa"`
-	Kecamatan        string         `gorm:"not null" json:"kecamatan"`
-	KabupatenKota    string         `gorm:"not null" json:"kabupatenKota"`
-	Provinsi         string         `gorm:"not null" json:"provinsi"`
 	Pekerjaan        string         `gorm:"not null" json:"pekerjaan"`
 	StatusPerkawinan string         `gorm:"not null" json:"statusPerkawinan"`
 	Kewarganegaraan  string         `gorm:"not null" json:"kewarganegaraan"`

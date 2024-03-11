@@ -94,8 +94,7 @@ func (r repository) List(conn *gorm.DB, req *request.ListVillage) ([]model.Villa
 
 	query = query.Order(fmt.Sprintf("%s %s", "village_name", "asc"))
 
-	err = query.Offset(req.GetLimit()).
-		Limit(req.GetLimit()).
+	err = query.Limit(req.GetLimit()).
 		Find(&data).Error
 	if err != nil {
 		return data, err
